@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.LoginController">
+   <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0E5C46;">
+      <Label layoutX="274.0" layoutY="60.0" prefHeight="17.0" prefWidth="45.0" text="User" textFill="WHITE">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="userCheckBox" layoutX="274.0" layoutY="95.0" prefHeight="28.0" prefWidth="304.0" style="-fx-background-color: #0b4233;" />
+      <Label layoutX="276.0" layoutY="148.0" prefHeight="21.0" prefWidth="55.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailField" layoutX="274.0" layoutY="178.0" prefHeight="26.0" prefWidth="304.0" promptText="Enter email" style="-fx-background-color: #0b4233; -fx-text-fill: #fff;">
+         <font>
+            <Font name="☞Gilroy-Regular" size="16.0" />
+         </font></TextField>
+      <Label layoutX="278.0" layoutY="237.0" prefHeight="21.0" prefWidth="94.0" text="Password" textFill="WHITE">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField" layoutX="274.0" layoutY="267.0" prefHeight="25.0" prefWidth="304.0" promptText="Enter Password" style="-fx-background-color: #0b4233; -fx-text-fill: #fff;">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
+      <Button fx:id="LoginButton" layoutX="276.0" layoutY="324.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="30.0" prefWidth="304.0" style="-fx-background-color: #FF8A00; -fx-border-radius: 24;" text="Login" textFill="#076900">
+         <font>
+            <Font name="☞Gilroy-Bold" size="16.0" />
+         </font>
+      </Button>
+   </Pane>
+   <Pane prefHeight="400.0" prefWidth="244.0" style="-fx-background-color: #ffffff;">
+      <Text layoutX="43.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop Expense Tracker" wrappingWidth="140.42425537109375">
+         <font>
+            <Font name="☞Gilroy-SemiBold" size="32.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="118.0" fitWidth="106.0" layoutX="39.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../../image/marketplace.png" />
+      </ImageView>
+   </Pane>
+</Pane>
