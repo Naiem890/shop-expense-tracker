@@ -7,3 +7,15 @@
 .choice-box > .label {
      -fx-text-fill: white;
 }
+
+.button{
+    -fx-background-color: #0f0f0f;
+    -fx-text-fill: white;
+}
+.button:hover{
+    -fx-background-color: #0E5C46;
+}
+
+.button:pressed{
+    -fx-background-color: #0E5C46;
+}

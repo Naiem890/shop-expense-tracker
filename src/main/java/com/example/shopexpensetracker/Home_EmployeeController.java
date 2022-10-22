@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -34,6 +36,13 @@ public class Home_EmployeeController implements Initializable {
             Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-list.fxml")));
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
+
+            File file = new File("src/main/resources/data/Product.xlsx");
+            FileInputStream fis = new FileInputStream(file);
+
+            fis.close();
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

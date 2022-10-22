@@ -9,19 +9,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_EmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_EmployeeController">
    <left>
-      <VBox prefHeight="472.0" prefWidth="225.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
-         <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" text="Product List" />
-         <Button fx:id="requestProductBtn" mnemonicParsing="false" onAction="#toRequestProduct" prefHeight="42.0" prefWidth="226.0" text="Request Product" />
-         <Button fx:id="sellBtn" mnemonicParsing="false" prefHeight="42.0" onAction="#toSell" prefWidth="226.0" text="Sell Product" />
-         <Button fx:id="mySalaryBtn" mnemonicParsing="false" prefHeight="42.0" onAction="#toSalary" prefWidth="226.0" text="My Salary" />
-         <Button fx:id="reportBtn" mnemonicParsing="false" prefHeight="42.0" onAction="#toReport" prefWidth="226.0" text="Generate Report" />
+      <VBox prefHeight="472.0" prefWidth="225.0" spacing="4.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
+         <Pane prefHeight="33.0" prefWidth="226.0" />
+         <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Product List" />
+         <Button fx:id="requestProductBtn" mnemonicParsing="false" onAction="#toRequestProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Request Product" />
+         <Button fx:id="sellBtn" mnemonicParsing="false" onAction="#toSell" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Sell Product" />
+         <Button fx:id="mySalaryBtn" mnemonicParsing="false" onAction="#toSalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="My Salary" />
+         <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
       </VBox>
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <StackPane fx:id="contentArea" prefHeight="352.0" prefWidth="448.8" style="-fx-background-color: #F3F3F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         <StackPane fx:id="contentArea" prefHeight="472.0" prefWidth="689.6" style="-fx-background-color: #F3F3F3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       </AnchorPane>
    </center>
    <top>

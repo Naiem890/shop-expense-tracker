@@ -12,9 +12,11 @@ public class Home_Employee extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Home_Employee.class.getResource("home-employee.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Login");
+        stage.setTitle("Shop Expense Tracker");
         stage.setScene(scene);
         stage.show();
+//        Workbook
+
     }
 
     public static void main(String[] args) {
