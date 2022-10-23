@@ -15,7 +15,6 @@ public class Home_Employee extends Application {
         stage.setTitle("Shop Expense Tracker");
         stage.setScene(scene);
         stage.show();
-//        Workbook
 
     }
 

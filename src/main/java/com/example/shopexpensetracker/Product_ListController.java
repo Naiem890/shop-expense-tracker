@@ -1,23 +1,29 @@
 package com.example.shopexpensetracker;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.IOError;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Product_ListController {
+public class Product_ListController implements Initializable{
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            File file = new File("src/main/resources/data/Product.xlsx");
+            FileInputStream fis = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            System.out.println(sheet);
+            System.out.println(workbook);
+            String cellvalue = sheet.getRow(0).getCell(0).getStringCellValue();
+            System.out.println(cellvalue);
+            fis.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

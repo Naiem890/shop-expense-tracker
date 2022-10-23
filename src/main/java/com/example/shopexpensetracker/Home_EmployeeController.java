@@ -37,12 +37,6 @@ public class Home_EmployeeController implements Initializable {
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
 
-            File file = new File("src/main/resources/data/Product.xlsx");
-            FileInputStream fis = new FileInputStream(file);
-
-            fis.close();
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
