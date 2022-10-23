@@ -13,11 +13,12 @@
    <left>
       <VBox prefHeight="472.0" prefWidth="225.0" spacing="4.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
          <Pane prefHeight="33.0" prefWidth="226.0" />
-         <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Product List" />
+         <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Products List" />
          <Button fx:id="requestProductBtn" mnemonicParsing="false" onAction="#toRequestProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Request Product" />
          <Button fx:id="sellBtn" mnemonicParsing="false" onAction="#toSell" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Sell Product" />
          <Button fx:id="mySalaryBtn" mnemonicParsing="false" onAction="#toSalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="My Salary" />
          <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
+         <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#toAddProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Add Product" />
       </VBox>
    </left>
    <center>

@@ -4,13 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -35,34 +30,15 @@ public class LoginController implements Initializable {
         System.out.print(email+password+userType+"\n");
         if(Objects.equals(userType, "Employee")){
             if(Objects.equals(email, "employee@shop.com") && Objects.equals(password, "password")){
-                changeCurrentScreen(event,"home-employee.fxml");
+                Helper.changeCurrentScreen(event,"home-employee.fxml");
             }
             else {
-                showModal(event,"Login - Error","Wrong Credential!!!\nEnter Again");
+                Helper.showModal("Login - Error","Wrong Credential!!!\nEnter Again");
             }
         }
         else {
-            showModal(event,"Login - Error","Wrong Credential!!!\nEnter Again");
+            Helper.showModal("Login - Error","Wrong Credential!!!\nEnter Again");
         }
-    }
-
-    private void showModal(ActionEvent event,String ModalTitle, String modalMessage) {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle(ModalTitle);
-        dialog.setContentText(modalMessage);
-        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(type);
-        dialog.showAndWait();
-        System.out.print(modalMessage);
-    }
-
-    private void changeCurrentScreen(ActionEvent event, String PageFXML) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(PageFXML));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @Override

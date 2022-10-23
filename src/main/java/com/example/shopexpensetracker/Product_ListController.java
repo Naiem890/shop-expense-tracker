@@ -1,29 +1,39 @@
 package com.example.shopexpensetracker;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Product_ListController implements Initializable{
+    @FXML
+    private TableView<Product> table;
+    @FXML
+    private TableColumn<Product, Integer> productID;
+    @FXML
+    private TableColumn<Product, String> productName;
+    @FXML
+    private TableColumn<Product, Double> price;
+    @FXML
+    private TableColumn<Product, Integer> stock;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        productID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        price.setCellValueFactory(new PropertyValueFactory<>("productPrice"));
+        stock.setCellValueFactory(new PropertyValueFactory<>("productStock"));
         try {
-            File file = new File("src/main/resources/data/Product.xlsx");
-            FileInputStream fis = new FileInputStream(file);
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            XSSFSheet sheet = workbook.getSheetAt(0);
-            System.out.println(sheet);
-            System.out.println(workbook);
-            String cellvalue = sheet.getRow(0).getCell(0).getStringCellValue();
-            System.out.println(cellvalue);
-            fis.close();
+            table.setItems(Common.getAllProduct());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }

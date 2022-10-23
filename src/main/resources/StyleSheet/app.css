@@ -19,3 +19,25 @@
 .button:pressed{
     -fx-background-color: #0E5C46;
 }
+
+.table-view .table-column {
+  -fx-alignment: CENTER;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-padding: 16 0 10 0px;
+}
+.table-row-cell: hover {
+    -fx-background-color: #0B423350;
+    //-fx-text-background-color: white;
+}
+
+.table-row-cell:checked  {
+    -fx-background-color: #93f9b950;
+    //-fx-text-background-color: white;
+}
+
