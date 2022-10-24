@@ -1,5 +1,6 @@
 package com.example.shopexpensetracker;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +13,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Home_EmployeeController implements Initializable {
+public class Home_AdminController implements Initializable {
     @FXML
     protected Button addProductBtn;
     @FXML
@@ -46,25 +47,34 @@ public class Home_EmployeeController implements Initializable {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
-    public void toSell () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-sell.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
-    }
-    public void toRequestProduct () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-request.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
-    }
+
     public void toReport () throws IOException {
         Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("report.fxml")));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
-    public void toSalary () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("salary-employee.fxml")));
+
+    public void toAddProduct () throws IOException {
+        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("add-product.fxml")));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
 
+    public void toPaySalary() throws IOException{
+        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("pay-salary.fxml")));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    public void toBuy() throws IOException{
+        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("buy-product.fxml")));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    public void toPayBills() throws IOException{
+        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("pay-bills.fxml")));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
 }

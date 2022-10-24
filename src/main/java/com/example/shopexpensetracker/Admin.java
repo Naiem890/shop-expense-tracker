@@ -21,14 +21,16 @@ public class Admin {
             XSSFSheet sheet = workbook.getSheetAt(0);
             System.out.println(sheet);
 
-            int lastRow = sheet.getLastRowNum() + 1;
+            int lastRow = sheet.getLastRowNum();
             System.out.println(lastRow);
             System.out.println(ProductName);
             System.out.println(ProductPrice);
             System.out.println(ProductStock);
-            XSSFRow row = sheet.createRow(lastRow);
+            XSSFRow row = sheet.createRow(lastRow + 1) ;
 
-            row.createCell(0).setCellValue(lastRow);
+            int productID = (int) sheet.getRow(lastRow).getCell(0).getNumericCellValue() + 1;
+
+            row.createCell(0).setCellValue(productID);
             row.createCell(1).setCellValue(ProductName);
             row.createCell(2).setCellValue(ProductPrice);
             row.createCell(3).setCellValue(ProductStock);

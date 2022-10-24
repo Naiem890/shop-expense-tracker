@@ -9,23 +9,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_EmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_AdminController">
    <left>
       <VBox prefHeight="472.0" prefWidth="225.0" spacing="4.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
          <Pane prefHeight="62.0" prefWidth="226.0" style="-fx-background-color: #3D3D3D;">
             <children>
-               <Label layoutX="35.0" layoutY="19.0" text="User: Emplopyee" textFill="WHITE">
+               <Label layoutX="57.0" layoutY="19.0" text="User: Admin" textFill="WHITE">
                   <font>
                      <Font name="☞Gilroy-Bold" size="20.0" />
                   </font>
                </Label>
-            </children>
-         </Pane>
+            </children></Pane>
          <Pane prefHeight="28.0" prefWidth="226.0" style="-fx-background-color: #0f0f0f;" />
          <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Products List" />
-         <Button fx:id="requestProductBtn" mnemonicParsing="false" onAction="#toRequestProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Request Product" />
-         <Button fx:id="sellBtn" mnemonicParsing="false" onAction="#toSell" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Sell Product" />
-         <Button fx:id="mySalaryBtn" mnemonicParsing="false" onAction="#toSalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="My Salary" />
+         <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#toAddProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Add Product" />
+         <Button fx:id="buyBtn" mnemonicParsing="false" onAction="#toBuy" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Buy Product" />
+         <Button fx:id="paySalaryBtn" mnemonicParsing="false" onAction="#toPaySalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Pay Salary" />
+         <Button fx:id="payBillsBtn" mnemonicParsing="false" onAction="#toPayBills" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Pay Bills" />
          <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
       </VBox>
    </left>

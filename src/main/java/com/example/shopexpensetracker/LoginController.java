@@ -36,6 +36,14 @@ public class LoginController implements Initializable {
                 Helper.showModal("Login - Error","Wrong Credential!!!\nEnter Again");
             }
         }
+        else if(Objects.equals(userType, "Admin")){
+            if(Objects.equals(email, "admin@shop.com") && Objects.equals(password, "password")){
+                Helper.changeCurrentScreen(event,"home-admin.fxml");
+            }
+            else {
+                Helper.showModal("Login - Error","Wrong Credential!!!\nEnter Again");
+            }
+        }
         else {
             Helper.showModal("Login - Error","Wrong Credential!!!\nEnter Again");
         }
