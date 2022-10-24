@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,6 +28,12 @@
          <Button fx:id="sellBtn" mnemonicParsing="false" onAction="#toSell" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Sell Product" />
          <Button fx:id="mySalaryBtn" mnemonicParsing="false" onAction="#toSalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="My Salary" />
          <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
+         <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="226.0"
+                 style="-fx-background-color: e00606;" styleClass=".button" text="Logout">
+            <VBox.margin>
+               <Insets top="16.0" />
+            </VBox.margin>
+         </Button>
       </VBox>
    </left>
    <center>

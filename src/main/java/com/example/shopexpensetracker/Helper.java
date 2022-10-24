@@ -8,9 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Helper {
     public static void showModal(String ModalTitle, String modalMessage) {
@@ -30,5 +32,10 @@ public class Helper {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    public static void changeScreenAt(StackPane contentArea, String FXMLFileName) throws IOException{
+        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(Helper.class.getResource(FXMLFileName)));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
     }
 }

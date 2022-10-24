@@ -1,18 +1,17 @@
 package com.example.shopexpensetracker;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Home_EmployeeController implements Initializable {
+    public Button logoutBtn;
     @FXML
     protected Button addProductBtn;
     @FXML
@@ -32,39 +31,29 @@ public class Home_EmployeeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
-            Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-list.fxml")));
-            contentArea.getChildren().removeAll();
-            contentArea.getChildren().setAll(fxml);
-
+            Helper.changeScreenAt(contentArea, "product-list.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void toProductList () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-list.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        Helper.changeScreenAt(contentArea, "product-list.fxml");
     }
     public void toSell () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-sell.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        Helper.changeScreenAt(contentArea, "product-sell.fxml");
     }
     public void toRequestProduct () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("product-request.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        Helper.changeScreenAt(contentArea, "product-request.fxml");
     }
     public void toReport () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("report.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        Helper.changeScreenAt(contentArea, "report.fxml");
     }
     public void toSalary () throws IOException {
-        Parent fxml =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("salary-employee.fxml")));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(fxml);
+        Helper.changeScreenAt(contentArea, "salary-employee.fxml");
+    }
+    public void toHome(ActionEvent event) throws IOException {
+        Helper.changeCurrentScreen(event, "login.fxml");
     }
 
 }

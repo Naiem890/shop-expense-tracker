@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_AdminController">
    <left>
@@ -27,6 +28,12 @@
          <Button fx:id="paySalaryBtn" mnemonicParsing="false" onAction="#toPaySalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Pay Salary" />
          <Button fx:id="payBillsBtn" mnemonicParsing="false" onAction="#toPayBills" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Pay Bills" />
          <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
+         <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="226.0"
+                 style="-fx-background-color: e00606;" styleClass=".button" text="Logout">
+            <VBox.margin>
+               <Insets top="16.0" />
+            </VBox.margin>
+         </Button>
       </VBox>
    </left>
    <center>
