@@ -27,7 +27,7 @@
             </font>
          </Label>
       </Group>
-      <Button fx:id="buProductBtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="163.0" style="-fx-background-color: FF8A00;" stylesheets="@../../../StyleSheet/app.css" text="Buy Product" textFill="#ff8a00">
+      <Button fx:id="buyProductBtn" onAction="#toBuyProductFinal" mnemonicParsing="false" prefHeight="38.0" prefWidth="163.0" style="-fx-background-color: FF8A00;" stylesheets="@../../../StyleSheet/app.css" text="Buy Product" textFill="#ff8a00">
          <font>
             <Font name="☞Gilroy-Medium" size="14.0" />
          </font>
