@@ -26,7 +26,7 @@ public class AddProductController {
             Helper.showModal("Wrong Input","Invalid Number \nEnter Again");
         }
         else {
-            String ProductName = addProductName.getText();
+            String ProductName = addProductName.getText().trim();
             double ProductPrice = Double.parseDouble(addProductPrice.getText());
             int ProductStock = Integer.parseInt(addProductStock.getText());
             System.out.println(ProductName);
