@@ -49,16 +49,19 @@ public class BuyProductFinalController {
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
             productFinalQuantity.setText("");
         }
-        else if(Integer.parseInt(productFinalQuantity.getText())>product.getProductStock()){
-            Helper.showModal("Wrong Input","Order amount should be minimum than stock amount \nEnter Again");
+        else {
+            if(Integer.parseInt(productFinalQuantity.getText())>product.getProductStock()){
+                Helper.showModal("Wrong Input","Order amount should be minimum than stock amount \nEnter Again");
+            }
+            else{
+                Admin.AddProduct(product.getProductName(),product.getProductPrice(),product.getProductStock());
+                Helper.showModal("Order Successful",
+                        "Order Name: " +product.getProductName()+"\n"
+                        +"Order Amount: " +productFinalQuantity.getText()+"\n"
+                        +"Order Price Per Piece: $ " +product.getProductPrice()+"\n"
+                                +"Total Bill: " +totalBill.getText()+"\n");
+            }
             productFinalQuantity.setText("");
-        }
-        else{
-            Helper.showModal("Order Successful",
-                    "Order Name: " +product.getProductName()+"\n"
-                    +"Order Amount: " +productFinalQuantity.getText()+"\n"
-                    +"Order Price Per Piece: $ " +product.getProductPrice()+"\n"
-                            +"Total Bill: " +totalBill.getText()+"\n");
         }
     }
 }

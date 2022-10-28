@@ -34,7 +34,7 @@ public class AddProductController {
             System.out.println(ProductStock);
 
             Admin.AddProduct(ProductName,ProductPrice,ProductStock);
-
+            Helper.showModal("Successful","Product has been added successfully.");
 
         }
         //Clearing the input boxes

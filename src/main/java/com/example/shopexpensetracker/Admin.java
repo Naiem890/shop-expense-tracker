@@ -75,7 +75,7 @@ public class Admin {
             os.close();
 
             System.out.println("Excel file has been updated successfully.");
-            Helper.showModal("Successful","Product has been added successfully.");
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
