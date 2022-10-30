@@ -80,7 +80,7 @@
                <Font name="☞Gilroy-Bold" size="20.0" />
             </font>
          </Label>
-         <TextField fx:id="productSellQuantity" onKeyReleased="#calclulatePrice" prefHeight="36.0" prefWidth="429.0" promptText="Enter quantity ">
+         <TextField fx:id="productSellQuantity" onKeyReleased="#calculatePrice" prefHeight="36.0" prefWidth="429.0" promptText="Enter quantity ">
             <font>
                <Font name="☞Gilroy-Medium" size="16.0" />
             </font>

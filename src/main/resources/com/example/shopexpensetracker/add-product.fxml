@@ -25,12 +25,12 @@
          <TextField fx:id="addProductName" prefHeight="36.0" prefWidth="278.0" />
       </VBox>
       <VBox prefHeight="100.0" prefWidth="322.0" spacing="12.0">
-         <Label text="Price">
+         <Label text="Buy Price">
             <font>
                <Font name="☞Gilroy-Medium" size="18.0" />
             </font>
          </Label>
-         <TextField fx:id="addProductPrice" prefHeight="36.0" prefWidth="298.0" />
+         <TextField fx:id="addProductBuyPrice" prefHeight="36.0" prefWidth="298.0" />
       </VBox>
    </HBox>
    <HBox layoutX="41.0" layoutY="250.0" prefHeight="100.0" prefWidth="606.0" spacing="32.0">
@@ -42,7 +42,16 @@
          </Label>
          <TextField fx:id="addProductStock" prefHeight="36.0" prefWidth="278.0" />
       </VBox>
-      <VBox prefHeight="100.0" prefWidth="322.0" spacing="12.0" />
+      <VBox prefHeight="100.0" prefWidth="322.0" spacing="12.0">
+         <children>
+            <Label text="Sell Price">
+               <font>
+                  <Font name="☞Gilroy-Medium" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="addProductSellPrice" prefHeight="36.0" prefWidth="298.0" />
+         </children>
+      </VBox>
    </HBox>
    <Button fx:id="addProduct" layoutX="41.0" layoutY="350.0" mnemonicParsing="false" onAction="#onAddProduct" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: #ff8a00;" text="Add" textFill="#ff8a00">
       <font>

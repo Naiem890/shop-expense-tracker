@@ -1,6 +1,5 @@
 package com.example.shopexpensetracker;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,12 +8,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class SellProductController implements Initializable {
@@ -47,7 +44,7 @@ public class SellProductController implements Initializable {
 
     }
 
-    public void calclulatePrice(KeyEvent keyEvent) {
+    public void calculatePrice(KeyEvent keyEvent) {
         if(!NumberUtils.isCreatable(keyEvent.getText())){
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
             productSellQuantity.setText("");
@@ -59,7 +56,7 @@ public class SellProductController implements Initializable {
         }
     }
 
-    public void sellProduct(ActionEvent actionEvent) {
+    public void sellProduct(ActionEvent actionEvent) throws IOException {
         if(productSellQuantity.getText().isEmpty()){
             Helper.showModal("Empty Input","Input is empty \nEnter Again");
             productSellQuantity.setText("");
@@ -73,7 +70,12 @@ public class SellProductController implements Initializable {
                 Helper.showModal("Wrong Input","Order amount should be minimum than stock amount \nEnter Again");
             }
             else{
-                Admin.AddProduct(product.getProductName(),product.getProductPrice(),product.getProductStock());
+                String reportTitle = "Sold (" + product.getProductName() + ")" + " X " + productSellQuantity.getText();
+                int productOrder = Integer.parseInt(productSellQuantity.getText());
+                double reportAmount = productOrder * product.getProductPrice();
+
+                Helper.addReport(reportTitle,reportAmount);
+
                 Helper.showModal("Selling Successful",
                         "Product Name: " +product.getProductName()+"\n"
                                 +"Sell Amount: " +productSellQuantity.getText()+"\n"

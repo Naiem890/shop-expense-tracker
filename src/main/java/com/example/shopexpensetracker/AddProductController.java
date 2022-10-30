@@ -8,38 +8,41 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 public class AddProductController {
 
+    public TextField addProductSellPrice;
+    public TextField addProductBuyPrice;
     @FXML
     private Button addProduct;
     @FXML
     private TextField addProductName;
     @FXML
-    private TextField addProductPrice;
-    @FXML
     private TextField addProductStock;
     @FXML
     protected void onAddProduct() {
 
-        if(addProductPrice.getText().isEmpty() || addProductName.getText().isEmpty() || addProductStock.getText().isEmpty()){
+        if(addProductSellPrice.getText().isEmpty() || addProductBuyPrice.getText().isEmpty() || addProductName.getText().isEmpty() || addProductStock.getText().isEmpty()){
             Helper.showModal("Wrong Input","Empty Input \nEnter Again");
         }
-        else if(!NumberUtils.isCreatable(addProductPrice.getText()) || !NumberUtils.isCreatable(addProductStock.getText())){
+        else if(!NumberUtils.isCreatable(addProductSellPrice.getText()) || !NumberUtils.isCreatable(addProductBuyPrice.getText()) || !NumberUtils.isCreatable(addProductStock.getText())){
             Helper.showModal("Wrong Input","Invalid Number \nEnter Again");
         }
         else {
             String ProductName = addProductName.getText().trim();
-            double ProductPrice = Double.parseDouble(addProductPrice.getText());
+            double ProductSellPrice = Double.parseDouble(addProductSellPrice.getText());
+            double ProductBuyPrice = Double.parseDouble(addProductBuyPrice.getText());
             int ProductStock = Integer.parseInt(addProductStock.getText());
             System.out.println(ProductName);
-            System.out.println(ProductPrice);
+            System.out.println(ProductSellPrice);
+            System.out.println(ProductBuyPrice);
             System.out.println(ProductStock);
 
-            Admin.AddProduct(ProductName,ProductPrice,ProductStock);
+            Admin.AddProduct(ProductName,ProductBuyPrice,ProductSellPrice,ProductStock);
             Helper.showModal("Successful","Product has been added successfully.");
 
         }
         //Clearing the input boxes
         addProductName.setText("");
-        addProductPrice.setText("");
+        addProductBuyPrice.setText("");
+        addProductSellPrice.setText("");
         addProductStock.setText("");
     }
 }

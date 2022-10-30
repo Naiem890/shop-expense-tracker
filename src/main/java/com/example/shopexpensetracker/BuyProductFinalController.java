@@ -1,6 +1,5 @@
 package com.example.shopexpensetracker;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -14,6 +13,7 @@ public class BuyProductFinalController {
     public Label productFinalPrice;
     public TextField productFinalQuantity;
     public Label totalBill;
+    public TextField productSellPrice;
     private Product product;
 
     public void setData(Product product) {
@@ -40,28 +40,32 @@ public class BuyProductFinalController {
         }
     }
 
-    public void placeOrder(ActionEvent actionEvent) {
-        if(productFinalQuantity.getText().isEmpty()){
+    public void placeOrder() {
+        if(productFinalQuantity.getText().isEmpty() || productSellPrice.getText().isEmpty()){
             Helper.showModal("Empty Input","Input is empty \nEnter Again");
             productFinalQuantity.setText("");
+            productSellPrice.setText("");
         }
-        else if(!NumberUtils.isCreatable(productFinalQuantity.getText())){
+        else if(!NumberUtils.isCreatable(productFinalQuantity.getText()) || !NumberUtils.isCreatable(productSellPrice.getText())){
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
             productFinalQuantity.setText("");
+            productSellPrice.setText("");
         }
         else {
             if(Integer.parseInt(productFinalQuantity.getText())>product.getProductStock()){
                 Helper.showModal("Wrong Input","Order amount should be minimum than stock amount \nEnter Again");
             }
             else{
-                Admin.AddProduct(product.getProductName(),product.getProductPrice(),product.getProductStock());
+                Admin.AddProduct(product.getProductName(),product.getProductPrice(), Double.parseDouble(productSellPrice.getText()), Integer.parseInt(productFinalQuantity.getText()));
                 Helper.showModal("Order Successful",
                         "Order Name: " +product.getProductName()+"\n"
                         +"Order Amount: " +productFinalQuantity.getText()+"\n"
-                        +"Order Price Per Piece: $ " +product.getProductPrice()+"\n"
+                        +"Order Price Per Piece: $" +product.getProductPrice()+"\n"
+                        +"Product Sell Price : $" + Double.parseDouble(productSellPrice.getText())+"\n"
                                 +"Total Bill: " +totalBill.getText()+"\n");
             }
             productFinalQuantity.setText("");
+            productSellPrice.setText("");
         }
     }
 }

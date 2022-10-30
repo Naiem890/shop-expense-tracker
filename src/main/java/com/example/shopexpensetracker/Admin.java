@@ -1,36 +1,34 @@
 package com.example.shopexpensetracker;
 
+import org.apache.poi.hpsf.Date;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Admin {
-    public static XSSFRow isPresent(XSSFSheet sheet, String ProductName, double ProductPrice){
+    public static XSSFRow isPresent(XSSFSheet sheet, String ProductName){
         int rowCount = sheet.getPhysicalNumberOfRows();
         for (int i = 1; i < rowCount; i++) {
             XSSFRow row = sheet.getRow(i);
             String ProductNameFind = row.getCell(1).getStringCellValue();
-            double ProductPriceFind = row.getCell(2).getNumericCellValue();
+
             if (Objects.equals(ProductName.toLowerCase().trim(), ProductNameFind.toLowerCase().trim())){
-                System.out.println("Name Matching");
-                System.out.println(ProductPrice);
-                System.out.println(ProductPriceFind);
-                System.out.println(ProductPrice == ProductPriceFind);
-                if (ProductPrice == ProductPriceFind) {
-                    System.out.println("Returning from");
-                    System.out.println(i);
-                    return row;
-                }
+                System.out.println("Returning from");
+                System.out.println(i);
+                return row;
             }
         }
         return null;
     }
-    public static void AddProduct(String ProductName,double ProductPrice,int ProductStock){
+    public static void AddProduct(String ProductName,double ProductBuyPrice,double ProductSellPrice,int ProductQuantity){
         try {
             File file = new File("src/main/resources/data/Product.xlsx");
             System.out.println(file.getAbsolutePath());
@@ -44,10 +42,11 @@ public class Admin {
             int lastRow = sheet.getLastRowNum();
             System.out.println(lastRow);
             System.out.println(ProductName);
-            System.out.println(ProductPrice);
-            System.out.println(ProductStock);
+            System.out.println(ProductBuyPrice);
+            System.out.println(ProductSellPrice);
+            System.out.println(ProductQuantity);
 
-            XSSFRow productIsPresent =  isPresent(sheet,ProductName,ProductPrice);
+            XSSFRow productIsPresent =  isPresent(sheet,ProductName);
 
             if(productIsPresent==null){
                 System.out.println("Product Is not present");
@@ -55,12 +54,13 @@ public class Admin {
                 XSSFRow row = sheet.createRow(lastRow + 1) ;
                 row.createCell(0).setCellValue(productID);
                 row.createCell(1).setCellValue(ProductName);
-                row.createCell(2).setCellValue(ProductPrice);
-                row.createCell(3).setCellValue(ProductStock);
+                row.createCell(2).setCellValue(ProductSellPrice);
+                row.createCell(3).setCellValue(ProductQuantity);
             }
             else{
                 System.out.println("Product Is present");
-                int updateProductStock =  ProductStock + (int) productIsPresent.getCell(3).getNumericCellValue();
+                int updateProductStock =  ProductQuantity + (int) productIsPresent.getCell(3).getNumericCellValue();
+                productIsPresent.getCell(2).setCellValue(ProductSellPrice);
                 productIsPresent.getCell(3).setCellValue(updateProductStock);
             }
 
@@ -74,7 +74,11 @@ public class Admin {
             workbook.close();
             os.close();
 
-            System.out.println("Excel file has been updated successfully.");
+            System.out.println("Product excel file has been updated successfully.");
+
+            String reportTitle = "Bought (" + ProductName + ")" + " X " + ProductQuantity;
+            double reportAmount = ProductQuantity * ProductBuyPrice * -1;
+            Helper.addReport(reportTitle,reportAmount);
 
 
         } catch (IOException e) {
