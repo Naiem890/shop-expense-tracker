@@ -57,6 +57,11 @@ public class BuyProductFinalController {
             }
             else{
                 Admin.AddProduct(product.getProductName(),product.getProductPrice(), Double.parseDouble(productSellPrice.getText()), Integer.parseInt(productFinalQuantity.getText()));
+
+                int remainStock = product.getProductStock()-Integer.parseInt(productFinalQuantity.getText());
+                Common.sellProduct("ThirdPartyProduct",product.getProductName(),remainStock);
+                setData(new Product(product.getProductID(), product.getProductName(),product.getProductPrice(),remainStock));
+
                 Helper.showModal("Order Successful",
                         "Order Name: " +product.getProductName()+"\n"
                         +"Order Amount: " +productFinalQuantity.getText()+"\n"

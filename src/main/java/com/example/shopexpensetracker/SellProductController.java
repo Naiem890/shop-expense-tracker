@@ -28,22 +28,23 @@ public class SellProductController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            products = Common.getAllProduct();
-            ObservableList<String> list = FXCollections.observableArrayList();
-            for (Product product:products) {
-                list.add("ID: "+product.getProductID()+" - "+product.getProductName());
-            }
-            productList.setValue("ID: "+products.get(0).getProductID()+" - "+products.get(0).getProductName());
-            setData(products.get(0));
-            this.product = products.get(0);
-            productList.setItems(list);
-
+            refresh();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-
+    public void refresh() throws IOException {
+        products = Common.getAllProduct();
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for (Product product:products) {
+            list.add("ID: "+product.getProductID()+" - "+product.getProductName());
+        }
+        setData(products.get(0));
+        this.product = products.get(0);
+        productList.setItems(list);
+        productList.setValue("ID: "+products.get(0).getProductID()+" - "+products.get(0).getProductName());
+    }
     public void calculatePrice(KeyEvent keyEvent) {
         if(!NumberUtils.isCreatable(keyEvent.getText())){
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
@@ -71,6 +72,8 @@ public class SellProductController implements Initializable {
                 String reportTitle = "Sold (" + product.getProductName() + ")" + " X " + productSellQuantity.getText();
                 int productOrder = Integer.parseInt(productSellQuantity.getText());
                 double reportAmount = productOrder * product.getProductPrice();
+                int remainStock = product.getProductStock() - productOrder;
+                Common.sellProduct("Product",product.getProductName(),remainStock);
 
                 Common.addReport(reportTitle,reportAmount);
 
@@ -79,6 +82,7 @@ public class SellProductController implements Initializable {
                                 +"Sell Amount: " +productSellQuantity.getText()+"\n"
                                 +"Sell Price Per Piece: $" +product.getProductPrice()+"\n"
                                 +"Total Price: " +totalPrice.getText()+"\n");
+                refresh();
             }
         }
         productSellQuantity.setText("");
@@ -93,12 +97,19 @@ public class SellProductController implements Initializable {
         return null;
     }
     public void onSelectProduct(ActionEvent actionEvent) {
-        int productSelectID = Integer.parseInt(productList.getValue().split(" ")[1]); // for selecting ID
+        int productSelectID = Integer.MIN_VALUE;
+        if(productList.getValue()!=null){
+            productSelectID= Integer.parseInt(productList.getValue().split(" ")[1]); // for selecting ID
+        }
         Product p = findProduct(productSelectID);
 
         if(p!=null){
             setData(p);
             this.product = p;
+        }
+        else{
+            setData(products.get(0));
+            this.product = products.get(0);
         }
     }
 

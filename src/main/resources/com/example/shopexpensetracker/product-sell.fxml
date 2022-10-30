@@ -95,7 +95,7 @@
          <Font name="☞Gilroy-Bold" size="18.0" />
       </font>
    </Button>
-   <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="384.0" prefHeight="56.0" prefWidth="220.0" spacing="10.0" style="-fx-background-color: #0E5C4620; -fx-text-fill: white;">
+   <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="384.0" prefHeight="56.0" prefWidth="288.0" spacing="10.0" style="-fx-background-color: #0E5C4620; -fx-text-fill: white;">
       <padding>
          <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
       </padding>

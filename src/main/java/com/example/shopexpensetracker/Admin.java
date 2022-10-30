@@ -9,23 +9,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Admin {
-    public static XSSFRow isPresent(XSSFSheet sheet, String ProductName){
-        int rowCount = sheet.getPhysicalNumberOfRows();
-        for (int i = 1; i < rowCount; i++) {
-            XSSFRow row = sheet.getRow(i);
-            String ProductNameFind = row.getCell(1).getStringCellValue();
 
-            if (Objects.equals(ProductName.toLowerCase().trim(), ProductNameFind.toLowerCase().trim())){
-                System.out.println("Returning from");
-                System.out.println(i);
-                return row;
-            }
-        }
-        return null;
-    }
     public static void AddProduct(String ProductName,double ProductBuyPrice,double ProductSellPrice,int ProductQuantity) throws IOException {
 
         File file = new File("src/main/resources/data/Product.xlsx");
@@ -44,7 +30,7 @@ public class Admin {
         System.out.println(ProductSellPrice);
         System.out.println(ProductQuantity);
 
-        XSSFRow productIsPresent =  isPresent(sheet,ProductName);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName);
 
         if(productIsPresent==null){
             System.out.println("Product Is not present");

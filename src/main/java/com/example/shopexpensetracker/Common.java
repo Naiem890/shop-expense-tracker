@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class Common {
     static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -109,5 +110,51 @@ public class Common {
         workbook.close();
         os.close();
 
+    }
+
+    public static XSSFRow isPresent(XSSFSheet sheet, String ProductName){
+        int rowCount = sheet.getPhysicalNumberOfRows();
+        for (int i = 1; i < rowCount; i++) {
+            XSSFRow row = sheet.getRow(i);
+            String ProductNameFind = row.getCell(1).getStringCellValue();
+
+            if (Objects.equals(ProductName.toLowerCase().trim(), ProductNameFind.toLowerCase().trim())){
+                System.out.println("Returning from");
+                System.out.println(i);
+                return row;
+            }
+        }
+        return null;
+    }
+    public static void sellProduct(String productType, String productName, int remainStock) throws IOException {
+        String filePath = "";
+        if(Objects.equals(productType, "Product")){
+            filePath = "src/main/resources/data/Product.xlsx";
+        }else if(Objects.equals(productType, "ThirdPartyProduct")){
+            filePath = "src/main/resources/data/ThirdPartyProduct.xlsx";
+        }
+
+        File file = new File(filePath);
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+
+        XSSFRow productIsPresent =  Common.isPresent(sheet,productName);
+        assert productIsPresent != null;
+        productIsPresent.getCell(3).setCellValue(remainStock);
+
+        fis.close();
+
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+        System.out.println("Product excel file has been updated successfully.");
     }
 }
