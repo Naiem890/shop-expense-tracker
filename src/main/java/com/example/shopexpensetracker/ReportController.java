@@ -15,10 +15,13 @@ import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
+import static java.time.temporal.TemporalAdjusters.previousOrSame;
+import static java.time.DayOfWeek.MONDAY;
 public class ReportController implements Initializable {
     public TableView<Report> reportTable;
     public TableColumn<Report, Date> reportDate;
@@ -41,7 +44,7 @@ public class ReportController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> durations = FXCollections.observableArrayList("All", "Monthly", "Yearly");
+        ObservableList<String> durations = FXCollections.observableArrayList("All", "Yearly", "Monthly", "Weekly");
         reportDurationChoice.setValue(durations.get(0));
         reportDurationChoice.setItems(durations);
         reportDate.setCellValueFactory(new PropertyValueFactory<>("reportDate"));
@@ -67,19 +70,23 @@ public class ReportController implements Initializable {
 
     public void onSelectDuration(ActionEvent e) throws IOException, ParseException {
         String durationChoice = reportDurationChoice.getValue();
-        if(Objects.equals(durationChoice, "Monthly")){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            String dateLimit = formatter.format(LocalDate.now().withDayOfMonth(1));
-            reports.setAll(Common.getReport(dateLimit));
-            reportTable.setItems(reports);
-        }
-        else if(Objects.equals(durationChoice, "Yearly")){
+
+        if(Objects.equals(durationChoice, "Yearly")){
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             String dateLimit = formatter.format(LocalDate.now().withDayOfYear(1));
             reports.setAll(Common.getReport(dateLimit));
             reportTable.setItems(reports);
-        }
-        else{
+        }else if(Objects.equals(durationChoice, "Monthly")){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            String dateLimit = formatter.format(LocalDate.now().withDayOfMonth(1));
+            reports.setAll(Common.getReport(dateLimit));
+            reportTable.setItems(reports);
+        }else if(Objects.equals(durationChoice, "Weekly")){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            String dateLimit = formatter.format(LocalDate.now().with(previousOrSame(MONDAY)));
+            reports.setAll(Common.getReport(dateLimit));
+            reportTable.setItems(reports);
+        }else{
             reports.setAll(Common.getReport());
             reportTable.setItems(reports);
         }
