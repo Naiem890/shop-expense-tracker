@@ -1,14 +1,12 @@
 package com.example.shopexpensetracker;
 
-import org.apache.poi.hpsf.Date;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,62 +26,58 @@ public class Admin {
         }
         return null;
     }
-    public static void AddProduct(String ProductName,double ProductBuyPrice,double ProductSellPrice,int ProductQuantity){
-        try {
-            File file = new File("src/main/resources/data/Product.xlsx");
-            System.out.println(file.getAbsolutePath());
+    public static void AddProduct(String ProductName,double ProductBuyPrice,double ProductSellPrice,int ProductQuantity) throws IOException {
 
-            FileInputStream fis = new FileInputStream(file);
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            System.out.println(workbook);
-            XSSFSheet sheet = workbook.getSheetAt(0);
-            System.out.println(sheet);
+        File file = new File("src/main/resources/data/Product.xlsx");
+        System.out.println(file.getAbsolutePath());
 
-            int lastRow = sheet.getLastRowNum();
-            System.out.println(lastRow);
-            System.out.println(ProductName);
-            System.out.println(ProductBuyPrice);
-            System.out.println(ProductSellPrice);
-            System.out.println(ProductQuantity);
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
 
-            XSSFRow productIsPresent =  isPresent(sheet,ProductName);
+        int lastRow = sheet.getLastRowNum();
+        System.out.println(lastRow);
+        System.out.println(ProductName);
+        System.out.println(ProductBuyPrice);
+        System.out.println(ProductSellPrice);
+        System.out.println(ProductQuantity);
 
-            if(productIsPresent==null){
-                System.out.println("Product Is not present");
-                int productID = (int) sheet.getRow(lastRow).getCell(0).getNumericCellValue() + 1;
-                XSSFRow row = sheet.createRow(lastRow + 1) ;
-                row.createCell(0).setCellValue(productID);
-                row.createCell(1).setCellValue(ProductName);
-                row.createCell(2).setCellValue(ProductSellPrice);
-                row.createCell(3).setCellValue(ProductQuantity);
-            }
-            else{
-                System.out.println("Product Is present");
-                int updateProductStock =  ProductQuantity + (int) productIsPresent.getCell(3).getNumericCellValue();
-                productIsPresent.getCell(2).setCellValue(ProductSellPrice);
-                productIsPresent.getCell(3).setCellValue(updateProductStock);
-            }
+        XSSFRow productIsPresent =  isPresent(sheet,ProductName);
 
-            fis.close();
-
-            //Creating output stream and writing the updated workbook
-            FileOutputStream os = new FileOutputStream(file);
-            workbook.write(os);
-
-            //Close the workbook and output stream
-            workbook.close();
-            os.close();
-
-            System.out.println("Product excel file has been updated successfully.");
-
-            String reportTitle = "Bought (" + ProductName + ")" + " X " + ProductQuantity;
-            double reportAmount = ProductQuantity * ProductBuyPrice * -1;
-            Helper.addReport(reportTitle,reportAmount);
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if(productIsPresent==null){
+            System.out.println("Product Is not present");
+            int productID = (int) sheet.getRow(lastRow).getCell(0).getNumericCellValue() + 1;
+            XSSFRow row = sheet.createRow(lastRow + 1) ;
+            row.createCell(0).setCellValue(productID);
+            row.createCell(1).setCellValue(ProductName);
+            row.createCell(2).setCellValue(ProductSellPrice);
+            row.createCell(3).setCellValue(ProductQuantity);
         }
+        else{
+            System.out.println("Product Is present");
+            int updateProductStock =  ProductQuantity + (int) productIsPresent.getCell(3).getNumericCellValue();
+            productIsPresent.getCell(2).setCellValue(ProductSellPrice);
+            productIsPresent.getCell(3).setCellValue(updateProductStock);
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+
+        System.out.println("Product excel file has been updated successfully.");
+
+        String reportTitle = "Bought (" + ProductName + ")" + " X " + ProductQuantity;
+        double reportAmount = ProductQuantity * ProductBuyPrice * -1;
+        Common.addReport(reportTitle,reportAmount);
+
     }
 
     public static List<Product> getThirdPartyProduct() throws IOException {
@@ -109,5 +103,54 @@ public class Admin {
 
         fis.close();
         return products;
+    }
+
+    public static ObservableList<Bill> getBills() throws IOException {
+        ObservableList <Bill> billList = FXCollections.observableArrayList();
+        File file = new File("src/main/resources/data/Report.xlsx");
+        System.out.println(file.getAbsolutePath());
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheet("bill-names");
+        System.out.println(sheet);
+        int rowCount = sheet.getPhysicalNumberOfRows();
+
+        for (int i = 1; i < rowCount; i++) {
+            XSSFRow row = sheet.getRow(i);
+            String billName = row.getCell(0).getStringCellValue();
+            billList.add(new Bill(billName));
+        }
+        return billList;
+    }
+
+    public static void addBill(String billName) throws IOException {
+        File file = new File("src/main/resources/data/Report.xlsx");
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheet("bill-names");
+        System.out.println(sheet);
+
+        int lastRow = sheet.getPhysicalNumberOfRows();
+        System.out.println(lastRow);
+        System.out.println(billName);
+
+        XSSFRow row = sheet.createRow(lastRow);
+        row.createCell(0).setCellValue(billName);
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+
+        System.out.println("Bill excel file has been updated successfully.");
     }
 }

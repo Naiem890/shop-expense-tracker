@@ -59,11 +59,9 @@ public class SellProductController implements Initializable {
     public void sellProduct(ActionEvent actionEvent) throws IOException {
         if(productSellQuantity.getText().isEmpty()){
             Helper.showModal("Empty Input","Input is empty \nEnter Again");
-            productSellQuantity.setText("");
         }
         else if(!NumberUtils.isCreatable(productSellQuantity.getText())){
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
-            productSellQuantity.setText("");
         }
         else {
             if(Integer.parseInt(productSellQuantity.getText())>product.getProductStock()){
@@ -74,7 +72,7 @@ public class SellProductController implements Initializable {
                 int productOrder = Integer.parseInt(productSellQuantity.getText());
                 double reportAmount = productOrder * product.getProductPrice();
 
-                Helper.addReport(reportTitle,reportAmount);
+                Common.addReport(reportTitle,reportAmount);
 
                 Helper.showModal("Selling Successful",
                         "Product Name: " +product.getProductName()+"\n"
@@ -82,8 +80,8 @@ public class SellProductController implements Initializable {
                                 +"Sell Price Per Piece: $" +product.getProductPrice()+"\n"
                                 +"Total Price: " +totalPrice.getText()+"\n");
             }
-            productSellQuantity.setText("");
         }
+        productSellQuantity.setText("");
     }
     public Product findProduct(int ID) {
         System.out.println(ID);

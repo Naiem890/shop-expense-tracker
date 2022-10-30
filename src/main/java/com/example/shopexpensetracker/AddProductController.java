@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.math.NumberUtils;
+import java.io.IOException;
 
 
 public class AddProductController {
@@ -17,7 +18,7 @@ public class AddProductController {
     @FXML
     private TextField addProductStock;
     @FXML
-    protected void onAddProduct() {
+    protected void onAddProduct() throws IOException {
 
         if(addProductSellPrice.getText().isEmpty() || addProductBuyPrice.getText().isEmpty() || addProductName.getText().isEmpty() || addProductStock.getText().isEmpty()){
             Helper.showModal("Wrong Input","Empty Input \nEnter Again");

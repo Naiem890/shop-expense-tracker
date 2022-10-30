@@ -40,7 +40,7 @@ public class BuyProductFinalController {
         }
     }
 
-    public void placeOrder() {
+    public void placeOrder() throws IOException {
         if(productFinalQuantity.getText().isEmpty() || productSellPrice.getText().isEmpty()){
             Helper.showModal("Empty Input","Input is empty \nEnter Again");
             productFinalQuantity.setText("");

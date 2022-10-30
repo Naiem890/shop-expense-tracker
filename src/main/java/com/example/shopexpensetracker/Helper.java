@@ -47,40 +47,4 @@ public class Helper {
         contentArea.getChildren().setAll(fxml);
     }
 
-    public static void addReport( String reportTitle, double reportAmount) throws IOException {
-        Date now = new Date();
-        File file = new File("src/main/resources/data/Report.xlsx");
-        System.out.println(file.getAbsolutePath());
-
-        FileInputStream fis = new FileInputStream(file);
-        XSSFWorkbook workbook = new XSSFWorkbook(fis);
-        System.out.println(workbook);
-        XSSFSheet sheet = workbook.getSheet("report-sheet");
-        System.out.println(sheet);
-
-        int lastRow = sheet.getLastRowNum();
-        System.out.println(lastRow);
-        System.out.println(now);
-        System.out.println(reportTitle);
-        System.out.println(reportAmount);
-
-        XSSFRow row = sheet.createRow(lastRow + 1) ;
-        CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setDataFormat((short)14);
-        row.createCell(0).setCellStyle(cellStyle);
-        row.getCell(0).setCellValue(now);
-        row.createCell(1).setCellValue(reportTitle);
-        row.createCell(2).setCellValue(reportAmount);
-
-        fis.close();
-
-        //Creating output stream and writing the updated workbook
-        FileOutputStream os = new FileOutputStream(file);
-        workbook.write(os);
-
-        //Close the workbook and output stream
-        workbook.close();
-        os.close();
-
-    }
 }
