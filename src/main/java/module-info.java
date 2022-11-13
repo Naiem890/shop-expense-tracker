@@ -5,6 +5,7 @@ module com.example.shopexpensetracker {
     requires org.apache.poi.poi;
     requires org.apache.logging.log4j;
     requires org.apache.commons.lang3;
+    requires de.jensd.fx.glyphs.fontawesome;
 
 
     opens com.example.shopexpensetracker to javafx.fxml, org.apache.poi.poi, org.apache.poi.ooxml, org.apache.commons.lang3;

@@ -17,16 +17,9 @@ public class Home_AdminController implements Initializable {
     public Button payBillsBtn;
     public Button paySalaryBtn;
     public Button buyBtn;
+    public Button productManageBtn;
     @FXML
     protected Button addProductBtn;
-    @FXML
-    protected Button productListBtn;
-    @FXML
-    protected Button requestProductBtn;
-    @FXML
-    protected Button sellBtn;
-    @FXML
-    protected Button mySalaryBtn;
     @FXML
     protected Button reportBtn;
     @FXML
@@ -43,16 +36,15 @@ public class Home_AdminController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         try {
-            Helper.changeScreenAt(contentArea,"product-list.fxml");
+            toProductManage();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void toProductList () throws IOException {
-        Helper.changeScreenAt(contentArea,"product-list.fxml");
+    public void toProductManage () throws IOException {
+        Helper.changeScreenAt(contentArea,"product-manage.fxml");
     }
     public void toReport () throws IOException {
         Helper.changeScreenAt(contentArea,"report.fxml");

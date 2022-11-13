@@ -139,4 +139,64 @@ public class Admin {
 
         System.out.println("Bill excel file has been updated successfully.");
     }
+    public static void deleteProduct(String ProductName) throws IOException {
+        File file = new File("src/main/resources/data/Product.xlsx");
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName);
+        int totalNoOfRows = sheet.getLastRowNum();
+        System.out.println(totalNoOfRows);
+        if(productIsPresent != null){
+            int rowIndex = productIsPresent.getRowNum();
+            if (rowIndex >= 0 && rowIndex < totalNoOfRows) {
+                sheet.shiftRows(rowIndex + 1, totalNoOfRows, -1);
+            }
+            if (rowIndex == totalNoOfRows) {
+                sheet.removeRow(productIsPresent);
+            }
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+    }
+
+    public static void editProduct(Product product, String productName, int productStock, double productPrice) throws IOException {
+        File file = new File("src/main/resources/data/Product.xlsx");
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,product.getProductName());
+
+        if(productIsPresent != null){
+            productIsPresent.getCell(1).setCellValue(productName);
+            productIsPresent.getCell(2).setCellValue(productPrice);
+            productIsPresent.getCell(3).setCellValue(productStock);
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+    }
 }

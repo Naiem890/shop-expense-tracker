@@ -22,7 +22,7 @@
                </Label>
             </children></Pane>
          <Pane prefHeight="28.0" prefWidth="226.0" style="-fx-background-color: #0f0f0f;" />
-         <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Products List" />
+         <Button fx:id="productManageBtn" mnemonicParsing="false" onAction="#toProductManage" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Manage Products" />
          <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#toAddProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Add Product" />
          <Button fx:id="buyBtn" mnemonicParsing="false" onAction="#toBuy" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Buy Product" />
          <Button fx:id="paySalaryBtn" mnemonicParsing="false" onAction="#toPaySalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Pay Salary" />
