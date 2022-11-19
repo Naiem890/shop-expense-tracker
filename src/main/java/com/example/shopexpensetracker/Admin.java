@@ -2,11 +2,13 @@ package com.example.shopexpensetracker;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.poi.ss.format.CellDateFormatter;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,5 +200,31 @@ public class Admin {
         //Close the workbook and output stream
         workbook.close();
         os.close();
+    }
+
+    public static ObservableList<Employee> getAllEmployee() throws IOException, ParseException {
+        File file = new File("src/main/resources/data/Employee.xlsx");
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        System.out.println(workbook);
+
+        ObservableList<Employee> employeeList = FXCollections.observableArrayList();
+        int rowCount = sheet.getPhysicalNumberOfRows();
+
+        for (int i = 1; i < rowCount; i++) {
+            XSSFRow row = sheet.getRow(i);
+            int employeeID = (int) row.getCell(0).getNumericCellValue();
+            String lastPaidDate = new CellDateFormatter("MM/dd/yyyy").format(row.getCell(1).getDateCellValue());
+            String employeeEmail = row.getCell(2).getStringCellValue();
+            String employeeName = row.getCell(3).getStringCellValue();
+            String employeePassword = row.getCell(4).getStringCellValue();
+            Double employeeBalance = row.getCell(5).getNumericCellValue();
+            employeeList.add(new Employee(employeeID,lastPaidDate,employeeEmail,employeeName,employeePassword,employeeBalance));
+        }
+
+        fis.close();
+        return employeeList;
     }
 }
