@@ -3,6 +3,7 @@ package com.example.shopexpensetracker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.format.CellDateFormatter;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -10,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Admin {
@@ -226,5 +228,39 @@ public class Admin {
 
         fis.close();
         return employeeList;
+    }
+
+    public static void paySalary(Employee selectedEmployee, double salaryAmount) throws IOException {
+        File file = new File("src/main/resources/data/Employee.xlsx");
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow employeeIsPresent =  Common.isPresent(sheet,selectedEmployee.getEmployeeEmail(),2);
+
+        if(employeeIsPresent != null){
+            Date now = new Date();
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setDataFormat((short)14);
+            employeeIsPresent.getCell(1).setCellStyle(cellStyle);
+            employeeIsPresent.getCell(1).setCellValue(now);
+
+            double previousBalance = employeeIsPresent.getCell(5).getNumericCellValue();
+            double newSalary = salaryAmount + previousBalance;
+            employeeIsPresent.getCell(5).setCellValue(newSalary);
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
     }
 }

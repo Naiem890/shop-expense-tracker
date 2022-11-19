@@ -20,7 +20,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 
-public class paySalaryController implements Initializable {
+public class PaySalaryController implements Initializable {
 
     public TableColumn<Employee,Integer> employeeID;
     public TableColumn<Employee,String> employeeName;
@@ -29,6 +29,13 @@ public class paySalaryController implements Initializable {
     public TableColumn<Employee,String> employeeAction;
     public TableView<Employee> salaryTable;
     private Employee selectedEmployee;
+    public static PaySalaryController instance;
+    public PaySalaryController(){
+        instance = this;
+    }
+    public static PaySalaryController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -76,8 +83,13 @@ public class paySalaryController implements Initializable {
             return cell;
         };
         employeeAction.setCellFactory(cellFactory);
+        refreshTable();
+    }
+
+    public void refreshTable() throws IOException, ParseException {
         salaryTable.setItems(Admin.getAllEmployee());
     }
+
     public void paySalary() throws IOException {
         selectedEmployee = salaryTable.getSelectionModel().getSelectedItem();
         if(selectedEmployee != null){

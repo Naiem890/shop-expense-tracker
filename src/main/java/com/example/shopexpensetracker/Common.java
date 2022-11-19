@@ -116,9 +116,9 @@ public class Common {
         int rowCount = sheet.getPhysicalNumberOfRows();
         for (int i = 1; i < rowCount; i++) {
             XSSFRow row = sheet.getRow(i);
-            String ProductNameFind = row.getCell(colNoToSearch).getStringCellValue();
+            String nameToFind = row.getCell(colNoToSearch).getStringCellValue();
 
-            if (Objects.equals(ProductName.toLowerCase().trim(), ProductNameFind.toLowerCase().trim())){
+            if (Objects.equals(ProductName.toLowerCase().trim(), nameToFind.toLowerCase().trim())){
                 System.out.println("Returning from");
                 System.out.println(i);
                 return row;

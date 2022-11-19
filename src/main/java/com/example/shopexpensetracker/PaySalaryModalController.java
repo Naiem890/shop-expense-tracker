@@ -7,9 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PaySalaryModalController implements Initializable {
@@ -24,9 +27,21 @@ public class PaySalaryModalController implements Initializable {
 
     public void setData(Employee employee){
         this.selectedEmployee = employee;
-        employeeName.setText(employee.getEmployeeName());
-        employeeEmail.setText(employee.getEmployeeEmail());
-        employeeLastPaid.setText(employee.getLastPaidDate());
+        employeeName.setText(selectedEmployee.getEmployeeName());
+        employeeEmail.setText(selectedEmployee.getEmployeeEmail());
+        employeeLastPaid.setText(selectedEmployee.getLastPaidDate());
+        System.out.println(selectedEmployee.getEmployeePaid());
+        System.out.println(Objects.equals(selectedEmployee.getEmployeePaid(), "Not Paid"));
+        payBtn.setDisable(true);
+        payBtn.setDisable(false);
+        if(Objects.equals(selectedEmployee.getEmployeePaid(), "Not Paid")){
+            payBtn.setDisable(false);
+            slaryAmountField.setDisable(false);
+        } else{
+          payBtn.setDisable(true);
+          slaryAmountField.setDisable(true);
+          payBtn.setText("Already Paid");
+        }
     }
 
     public void closeModal(){
@@ -36,21 +51,21 @@ public class PaySalaryModalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        Platform.runLater( () -> paySalaryModal.requestFocus() );
+//        Platform.runLater(() -> paySalaryModal.requestFocus());
     }
 
-    public void onSave() throws IOException {
-//        System.out.println(productName.getText());
-//        System.out.println(productStock.getText());
-//        System.out.println(productPrice.getText());
-//        String name = productName.getText();
-//        int stock = Integer.parseInt(productStock.getText());
-//        double price = Double.parseDouble(productPrice.getText());
-//        Admin.editProduct(selectedProduct,name,stock,price);
-//        Product_ManageController.getInstance().refreshData();
-//        closeModal();
-    }
+    public void onPay(ActionEvent actionEvent) throws IOException, ParseException {
 
-    public void onPay(ActionEvent actionEvent) {
+        if(!NumberUtils.isCreatable(slaryAmountField.getText())){
+            Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
+            slaryAmountField.setText("");
+        }
+        else{
+            double salaryAmount = Double.parseDouble(slaryAmountField.getText());
+            System.out.println("Salary Amount: " + salaryAmount);
+            Admin.paySalary(selectedEmployee,salaryAmount);
+        }
+        PaySalaryController.getInstance().refreshTable();
+        closeModal();
     }
 }
