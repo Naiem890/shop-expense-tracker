@@ -157,4 +157,31 @@ public class Common {
         os.close();
         System.out.println("Product excel file has been updated successfully.");
     }
+
+    public static Employee isUserValid(String userType, String email, String password) throws IOException, ParseException {
+        String filePath = "src/main/resources/data/" + userType + ".xlsx";
+        File file = new File(filePath);
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow employeeIsPresent =  Common.isPresent(sheet,email,2);
+        if(employeeIsPresent!=null){
+            String employeePassword = employeeIsPresent.getCell(4).getStringCellValue();
+            if(Objects.equals(employeePassword, password)){
+                System.out.println("User Found");
+                int employeeID = (int) employeeIsPresent.getCell(0).getNumericCellValue();
+                String lastPaidDate = new CellDateFormatter("MM/dd/yyyy").format(employeeIsPresent.getCell(1).getDateCellValue());
+                String employeeEmail = employeeIsPresent.getCell(2).getStringCellValue();
+                String employeeName = employeeIsPresent.getCell(3).getStringCellValue();
+                Double employeeBalance = employeeIsPresent.getCell(5).getNumericCellValue();
+
+                return new Employee(employeeID,lastPaidDate,employeeEmail,employeeName,employeePassword,employeeBalance);
+            }
+        }
+        return null;
+    }
 }

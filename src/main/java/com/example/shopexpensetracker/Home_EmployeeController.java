@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.ResourceBundle;
 
 public class Home_EmployeeController implements Initializable {
     public Button logoutBtn;
+    public Label userName;
     @FXML
     protected Button addProductBtn;
     @FXML
@@ -26,6 +28,15 @@ public class Home_EmployeeController implements Initializable {
     protected Button reportBtn;
     @FXML
     protected StackPane contentArea;
+    private Employee employee;
+    public static Home_EmployeeController instance;
+
+    public Home_EmployeeController(){
+        instance = this;
+    }
+    public static Home_EmployeeController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +46,10 @@ public class Home_EmployeeController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void setData(Employee employee){
+        this.employee = employee;
+        userName.setText(employee.getEmployeeName());
     }
 
     public void toProductList () throws IOException {

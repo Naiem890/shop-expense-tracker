@@ -5,21 +5,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_EmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_EmployeeController">
    <left>
       <VBox prefHeight="472.0" prefWidth="225.0" spacing="4.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
          <Pane prefHeight="62.0" prefWidth="226.0" style="-fx-background-color: #3D3D3D;">
             <children>
-               <Label layoutX="35.0" layoutY="19.0" text="User: Emplopyee" textFill="WHITE">
-                  <font>
-                     <Font name="☞Gilroy-Bold" size="20.0" />
-                  </font>
-               </Label>
+               <HBox alignment="CENTER_LEFT" layoutX="34.0" layoutY="21.0" prefHeight="20.0" prefWidth="158.0" spacing="7.0">
+                  <children>
+                     <Label text="Hello," textFill="#ffffff99">
+                        <font>
+                           <Font name="☞Gilroy-Regular" size="18.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="userName" text="Employee" textFill="WHITE">
+                        <font>
+                           <Font name="☞Gilroy-Bold" size="18.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
             </children>
          </Pane>
          <Pane prefHeight="28.0" prefWidth="226.0" style="-fx-background-color: #0f0f0f;" />
@@ -28,8 +38,7 @@
          <Button fx:id="sellBtn" mnemonicParsing="false" onAction="#toSell" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Sell Product" />
          <Button fx:id="mySalaryBtn" mnemonicParsing="false" onAction="#toSalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="My Salary" />
          <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
-         <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="226.0"
-                 style="-fx-background-color: e00606;" styleClass=".button" text="Logout">
+         <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="226.0" style="-fx-background-color: e00606;" styleClass=".button" text="Logout">
             <VBox.margin>
                <Insets top="16.0" />
             </VBox.margin>

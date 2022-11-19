@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import java.io.IOError;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -23,14 +24,16 @@ public class LoginController implements Initializable {
     @FXML
     protected Button LoginButton;
     @FXML
-    protected void onLoginButtonClick(ActionEvent event) throws IOError, IOException {
+    protected void onLoginButtonClick(ActionEvent event) throws IOError, IOException, ParseException {
         String email = emailField.getText();
         String password = passwordField.getText();
         String userType = userCheckBox.getValue();
         System.out.print(email+password+userType+"\n");
         if(Objects.equals(userType, "Employee")){
-            if(Objects.equals(email, "employee@shop.com") && Objects.equals(password, "password")){
+            Employee isPresent = Common.isUserValid(userType, email, password);
+            if(isPresent != null){
                 Helper.changeCurrentScreen(event,"home-employee.fxml");
+                Home_EmployeeController.getInstance().setData(isPresent);
             }
             else {
                 Helper.showModal("Login - Error","Wrong Credential!!!\nEnter Again");
