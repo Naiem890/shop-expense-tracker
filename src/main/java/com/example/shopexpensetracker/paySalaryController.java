@@ -1,14 +1,18 @@
 package com.example.shopexpensetracker;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -24,6 +28,7 @@ public class paySalaryController implements Initializable {
     public TableColumn<Employee, String> employeePaid;
     public TableColumn<Employee,String> employeeAction;
     public TableView<Employee> salaryTable;
+    private Employee selectedEmployee;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,12 +61,14 @@ public class paySalaryController implements Initializable {
                         paySalary.setCursor(Cursor.HAND);
 
                         paySalary.setOnMouseClicked((MouseEvent event) -> {
-
+                            try {
+                                paySalary();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         });
 
-                        HBox btnWrapper = new HBox(paySalary);
-                        btnWrapper.setStyle("-fx-alignment:center");
-                        setGraphic(btnWrapper);
+                        setGraphic(paySalary);
                     }
                     setText(null);
                 }
@@ -70,5 +77,24 @@ public class paySalaryController implements Initializable {
         };
         employeeAction.setCellFactory(cellFactory);
         salaryTable.setItems(Admin.getAllEmployee());
+    }
+    public void paySalary() throws IOException {
+        selectedEmployee = salaryTable.getSelectionModel().getSelectedItem();
+        if(selectedEmployee != null){
+            FXMLLoader loader = new FXMLLoader ();
+            loader.setLocation(getClass().getResource("pay-salary-modal.fxml"));
+
+            loader.load();
+
+            PaySalaryModalController employee_salaryController = loader.getController();
+            employee_salaryController.setData(selectedEmployee);
+            Parent parent = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } else{
+            Helper.showModal("Selection Error!", "Please select one employee and click the pay button again.");
+        }
     }
 }

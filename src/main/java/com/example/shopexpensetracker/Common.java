@@ -112,11 +112,11 @@ public class Common {
 
     }
 
-    public static XSSFRow isPresent(XSSFSheet sheet, String ProductName){
+    public static XSSFRow isPresent(XSSFSheet sheet, String ProductName, Integer colNoToSearch){
         int rowCount = sheet.getPhysicalNumberOfRows();
         for (int i = 1; i < rowCount; i++) {
             XSSFRow row = sheet.getRow(i);
-            String ProductNameFind = row.getCell(1).getStringCellValue();
+            String ProductNameFind = row.getCell(colNoToSearch).getStringCellValue();
 
             if (Objects.equals(ProductName.toLowerCase().trim(), ProductNameFind.toLowerCase().trim())){
                 System.out.println("Returning from");
@@ -143,7 +143,7 @@ public class Common {
         XSSFSheet sheet = workbook.getSheetAt(0);
         System.out.println(sheet);
 
-        XSSFRow productIsPresent =  Common.isPresent(sheet,productName);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,productName,1);
         assert productIsPresent != null;
         productIsPresent.getCell(3).setCellValue(remainStock);
 

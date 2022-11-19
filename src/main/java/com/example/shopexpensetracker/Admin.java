@@ -32,7 +32,7 @@ public class Admin {
         System.out.println(ProductSellPrice);
         System.out.println(ProductQuantity);
 
-        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName,1);
 
         if(productIsPresent==null){
             System.out.println("Product Is not present");
@@ -150,7 +150,7 @@ public class Admin {
         System.out.println(workbook);
         XSSFSheet sheet = workbook.getSheetAt(0);
         System.out.println(sheet);
-        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName,1);
         int totalNoOfRows = sheet.getLastRowNum();
         System.out.println(totalNoOfRows);
         if(productIsPresent != null){
@@ -183,7 +183,7 @@ public class Admin {
         System.out.println(workbook);
         XSSFSheet sheet = workbook.getSheetAt(0);
         System.out.println(sheet);
-        XSSFRow productIsPresent =  Common.isPresent(sheet,product.getProductName());
+        XSSFRow productIsPresent =  Common.isPresent(sheet,product.getProductName(),1);
 
         if(productIsPresent != null){
             productIsPresent.getCell(1).setCellValue(productName);
