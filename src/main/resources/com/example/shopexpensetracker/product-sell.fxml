@@ -112,7 +112,7 @@
       </HBox>
       <Line endX="496.79998779296875" startX="-100.80000305175781" stroke="#00000033" />
       <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="606.0" spacing="20.0">
-         <Label prefHeight="24.0" prefWidth="152.0" text="Selling Quantity" HBox.hgrow="NEVER">
+         <Label prefHeight="25.0" prefWidth="175.0" text="Selling Quantity" HBox.hgrow="NEVER">
             <font>
                <Font name="☞Gilroy-Bold" size="20.0" />
             </font>

@@ -8,11 +8,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SellProductController implements Initializable {
@@ -27,12 +27,15 @@ public class SellProductController implements Initializable {
     public Product product;
     public TextField productCouponField;
     public Double employeeDiscountRate = 0.05;
+    public Double couponDiscount = 0.00;
     public CheckBox isEmployeeField;
     double finalPrice;
+    public ObservableList<ProductCoupon> availableProductCoupon;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             refresh();
+            availableProductCoupon = Common.getAllProductCoupon();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,19 +60,22 @@ public class SellProductController implements Initializable {
         else{
             int productOrder = Integer.parseInt(productSellQuantity.getText());
             finalPrice = product.getProductPrice() * productOrder;
+            finalPrice -= finalPrice * couponDiscount;
             if(isEmployeeField.isSelected()){
                 double discount = productOrder * product.getProductPrice() * employeeDiscountRate;
                 finalPrice -= discount;
             }
-            totalPrice.setText("$ "+ finalPrice);
+            totalPrice.setText("$ "+ String.format("%.2f",finalPrice));
         }
     }
 
     public void sellProduct(ActionEvent actionEvent) throws IOException {
         if(productSellQuantity.getText().isEmpty()){
+            resetUI();
             Helper.showModal("Empty Input","Input is empty \nEnter Again");
         }
         else if(!NumberUtils.isCreatable(productSellQuantity.getText())){
+            resetUI();
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
         }
         else {
@@ -114,11 +120,17 @@ public class SellProductController implements Initializable {
         if(p!=null){
             setData(p);
             this.product = p;
+            resetUI();
         }
         else{
             setData(products.get(0));
             this.product = products.get(0);
         }
+    }
+    private void resetUI() {
+        totalPrice.setText("$ ");
+        productSellQuantity.setText("");
+        productCouponField.setText("");
     }
 
     private void setData(Product p) {
@@ -127,7 +139,20 @@ public class SellProductController implements Initializable {
         productStock.setText(String.valueOf(p.getProductStock()));
     }
 
-    public void validateCoupon(ActionEvent actionEvent) {
+    public void validateCoupon() {
+        String couponCode =  productCouponField.getText();
+        couponDiscount = 0.00;
+        for (ProductCoupon productCoupon : availableProductCoupon) {
+            if (Objects.equals(productCoupon.getProductName(), product.getProductName()) &&Objects.equals(couponCode, productCoupon.getCouponCode())) {
+                Helper.showModal("Successful", "Coupon for " + productCoupon.getDiscountPercentage()*100 + "% discount added successfully");
+                couponDiscount = productCoupon.getDiscountPercentage();
+            }
+        }
+        if(couponDiscount==0.00){
+            productCouponField.setText("");
+            Helper.showModal("Invalid Coupon", "Coupon is not valid \nTry again!");
+        }
+        calculatePrice();
     }
 
     public void isEmployee(ActionEvent actionEvent) {
