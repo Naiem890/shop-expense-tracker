@@ -120,14 +120,12 @@ public class Product_ManageController implements Initializable {
     private void editProduct() throws IOException {
         selectedProduct = productTable.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader ();
-        loader.setLocation(getClass().getResource("product-edit.fxml"));
+        loader.setLocation(getClass().getResource("product-edit-modal.fxml"));
 
         loader.load();
 
         Product_EditController product_editController = loader.getController();
         product_editController.setData(selectedProduct);
-//        addStudentController.setTextField(student.getId(), student.getName(),
-//                student.getBirth().toLocalDate(),student.getAdress(), student.getEmail());
         Parent parent = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(parent));

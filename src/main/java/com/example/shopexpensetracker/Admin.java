@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.format.CellDateFormatter;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -254,6 +255,37 @@ public class Admin {
             double previousBalance = employeeIsPresent.getCell(5).getNumericCellValue();
             double newSalary = salaryAmount + previousBalance;
             employeeIsPresent.getCell(5).setCellValue(newSalary);
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+    }
+
+    public static void AddProductCoupon(Product product, String couponCode, double couponDiscount) throws IOException {
+        File file = new File("src/main/resources/data/Product.xlsx");
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,product.getProductName(),1);
+
+        if(productIsPresent != null){
+            productIsPresent.createCell(4).setCellValue(couponCode);
+            XSSFCell cell = productIsPresent.createCell(5);
+            cell.setCellValue(couponDiscount/100); // set value as number
+            CellStyle style = workbook.createCellStyle();
+            style.setDataFormat(workbook.createDataFormat().getFormat("0.000%"));
+            cell.setCellStyle(style);
         }
 
         fis.close();

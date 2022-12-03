@@ -1,13 +1,14 @@
 package com.example.shopexpensetracker;
 
-import com.example.shopexpensetracker.Common;
-import com.example.shopexpensetracker.Helper;
 import com.example.shopexpensetracker.Models.ProductCoupon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -16,6 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -29,6 +32,14 @@ public class ProductCouponController implements Initializable {
     public TableColumn<ProductCoupon, String> couponCode;
     public TableColumn<ProductCoupon, String> discountPercentage;
     public TableColumn<ProductCoupon, String> couponAction;
+    public static ProductCouponController instance;
+
+    public ProductCouponController(){
+        instance = this;
+    }
+    public static ProductCouponController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -97,5 +108,16 @@ public class ProductCouponController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+    }
+    public void addProductCoupon() throws IOException {
+        FXMLLoader loader = new FXMLLoader ();
+        loader.setLocation(getClass().getResource("product-coupon-modal.fxml"));
+        loader.load();
+
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.initStyle(StageStyle.UTILITY);
+        stage.show();
     }
 }
