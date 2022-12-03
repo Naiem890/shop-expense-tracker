@@ -13,7 +13,7 @@ public class Employee {
     private final String employeeEmail;
     private final String employeeName;
     private final String employeePassword;
-    private final Double balance;
+    private Double balance;
     private final String employeePaid;
 
 
@@ -71,5 +71,10 @@ public class Employee {
             return "Not Paid";
         }
     }
+
+    public void setBalance(double balance){
+        this.balance = balance;
+    }
+
 
 }

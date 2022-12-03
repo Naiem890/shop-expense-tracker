@@ -89,11 +89,17 @@ public class SellProductController implements Initializable {
             else{
                 String reportTitle = "Sold (" + product.getProductName() + ")" + " X " + productSellQuantity.getText();
                 int productOrder = Integer.parseInt(productSellQuantity.getText());
-                double reportAmount = productOrder * product.getProductPrice();
+//                double reportAmount = productOrder * product.getProductPrice();
                 int remainStock = product.getProductStock() - productOrder;
                 Common.sellProduct("Product",product.getProductName(),remainStock);
 
                 Common.addReport(reportTitle,finalPrice);
+                if(isEmployeeField.isSelected()){
+                    Home_EmployeeController controller = Home_EmployeeController.getInstance();
+                    double updatedSalary =  Common.reduceSalary(controller.getEmployee(),finalPrice);
+                    controller.getEmployee().setBalance(updatedSalary);
+                    controller.setData(controller.getEmployee());
+                }
 
                 Helper.showModal("Selling Successful",
                         "Product Name: " +product.getProductName()+"\n"

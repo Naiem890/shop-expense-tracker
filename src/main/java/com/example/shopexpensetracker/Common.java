@@ -243,4 +243,33 @@ public class Common {
         workbook.close();
         os.close();
     }
+
+    public static double reduceSalary(Employee employee, double finalPrice) throws IOException {
+        File file = new File("src/main/resources/data/Employee.xlsx");
+        System.out.println(file.getAbsolutePath());
+        double newBalance = employee.getBalance();
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow employeeIsPresent =  Common.isPresent(sheet,employee.getEmployeeEmail(),2);
+
+        if(employeeIsPresent != null){
+            double previousBalance = employeeIsPresent.getCell(5).getNumericCellValue();
+            newBalance = previousBalance - finalPrice;
+            employeeIsPresent.getCell(5).setCellValue(newBalance);
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
+        return newBalance;
+    }
 }

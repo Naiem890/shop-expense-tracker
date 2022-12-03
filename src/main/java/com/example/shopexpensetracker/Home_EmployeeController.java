@@ -39,6 +39,9 @@ public class Home_EmployeeController implements Initializable {
     public static Home_EmployeeController getInstance() {
         return instance;
     }
+    public Employee getEmployee(){
+        return this.employee;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
