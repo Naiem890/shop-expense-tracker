@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +25,10 @@ public class SellProductController implements Initializable {
     public Label totalPrice;
     public ObservableList<Product> products;
     public Product product;
-
+    public TextField productCouponField;
+    public Double employeeDiscountRate = 0.05;
+    public CheckBox isEmployeeField;
+    double finalPrice;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -45,14 +49,18 @@ public class SellProductController implements Initializable {
         productList.setItems(list);
         productList.setValue("ID: "+products.get(0).getProductID()+" - "+products.get(0).getProductName());
     }
-    public void calculatePrice(KeyEvent keyEvent) {
-        if(!NumberUtils.isCreatable(keyEvent.getText())){
+    public void calculatePrice() {
+        if(!NumberUtils.isCreatable(productSellQuantity.getText())){
             Helper.showModal("Wrong Input","Input is not a number \nEnter Again");
             productSellQuantity.setText("");
         }
         else{
             int productOrder = Integer.parseInt(productSellQuantity.getText());
-            double finalPrice = productOrder * product.getProductPrice();
+            finalPrice = product.getProductPrice() * productOrder;
+            if(isEmployeeField.isSelected()){
+                double discount = productOrder * product.getProductPrice() * employeeDiscountRate;
+                finalPrice -= discount;
+            }
             totalPrice.setText("$ "+ finalPrice);
         }
     }
@@ -75,7 +83,7 @@ public class SellProductController implements Initializable {
                 int remainStock = product.getProductStock() - productOrder;
                 Common.sellProduct("Product",product.getProductName(),remainStock);
 
-                Common.addReport(reportTitle,reportAmount);
+                Common.addReport(reportTitle,finalPrice);
 
                 Helper.showModal("Selling Successful",
                         "Product Name: " +product.getProductName()+"\n"
@@ -117,5 +125,12 @@ public class SellProductController implements Initializable {
         productName.setText(p.getProductName());
         productPrice.setText("$"+ p.getProductPrice());
         productStock.setText(String.valueOf(p.getProductStock()));
+    }
+
+    public void validateCoupon(ActionEvent actionEvent) {
+    }
+
+    public void isEmployee(ActionEvent actionEvent) {
+        calculatePrice();
     }
 }

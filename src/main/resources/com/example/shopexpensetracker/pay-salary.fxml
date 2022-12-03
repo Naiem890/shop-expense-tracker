@@ -14,7 +14,7 @@
             <TableColumn fx:id="employeeID" prefWidth="57.0" text="ID" />
             <TableColumn fx:id="employeeName" prefWidth="178.0" text="Employee Name" />
             <TableColumn fx:id="employeeEmail" prefWidth="185.0" text="Employee Email" />
-            <TableColumn fx:id="employeePaid" prefWidth="82.0" text="Paid" />
+            <TableColumn fx:id="employeePaid" prefWidth="82.0" text="Status" />
             <TableColumn fx:id="employeeAction" prefWidth="79.0" text="Action" />
          </columns>
       </TableView>

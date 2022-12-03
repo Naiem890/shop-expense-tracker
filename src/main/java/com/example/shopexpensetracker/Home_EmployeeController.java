@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 public class Home_EmployeeController implements Initializable {
     public Button logoutBtn;
     public Label userName;
+    public Label employeeBalance;
     @FXML
     protected Button addProductBtn;
     @FXML
@@ -50,6 +51,7 @@ public class Home_EmployeeController implements Initializable {
     public void setData(Employee employee){
         this.employee = employee;
         userName.setText(employee.getEmployeeName());
+        employeeBalance.setText(String.valueOf(employee.getBalance()));
     }
 
     public void toProductList () throws IOException {

@@ -4,14 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.format.CellDateFormatter;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +41,37 @@ public class Common {
         fis.close();
         return products;
     }
+
+    public static ObservableList<ProductCoupon> getAllProductCoupon() throws IOException {
+        File file = new File("src/main/resources/data/Product.xlsx");
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        System.out.println(workbook);
+
+        ObservableList<ProductCoupon> products = FXCollections.observableArrayList();
+        int rowCount = sheet.getPhysicalNumberOfRows();
+
+        for (int i = 1; i < rowCount; i++) {
+            XSSFRow row = sheet.getRow(i);
+            int ProductID = (int) row.getCell(0).getNumericCellValue();
+            String ProductName = row.getCell(1).getStringCellValue();
+            double ProductPrice = row.getCell(2).getNumericCellValue();
+            int ProductStock = (int) row.getCell(3).getNumericCellValue();
+            try{
+                String couponCode = row.getCell(4).getStringCellValue();
+                double discountPercentage = row.getCell(5).getNumericCellValue();
+                if(!Objects.equals(couponCode, "") && discountPercentage != 0){
+                    products.add(new ProductCoupon(couponCode,discountPercentage,new Product(ProductID,ProductName,ProductPrice,ProductStock)));
+                }
+            }catch (NullPointerException ignored){}
+        }
+
+        fis.close();
+        return products;
+    }
+
     public static ObservableList<Report> getReport() throws IOException, ParseException {
         String date = formatter.format(new Date(0L));
         return getReport(date);
@@ -183,5 +212,31 @@ public class Common {
             }
         }
         return null;
+    }
+
+    public static void deleteProductCoupon(String ProductName) throws IOException {
+        File file = new File("src/main/resources/data/Product.xlsx");
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fis = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        System.out.println(workbook);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        System.out.println(sheet);
+        XSSFRow productIsPresent =  Common.isPresent(sheet,ProductName,1);
+        if(productIsPresent != null){
+            productIsPresent.getCell(4).setCellValue((String) null);
+            productIsPresent.getCell(5).setCellValue((RichTextString) null);
+        }
+
+        fis.close();
+
+        //Creating output stream and writing the updated workbook
+        FileOutputStream os = new FileOutputStream(file);
+        workbook.write(os);
+
+        //Close the workbook and output stream
+        workbook.close();
+        os.close();
     }
 }

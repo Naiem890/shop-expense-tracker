@@ -18,6 +18,7 @@ public class Home_AdminController implements Initializable {
     public Button paySalaryBtn;
     public Button buyBtn;
     public Button productManageBtn;
+    public Button couponDiscountBtn;
     @FXML
     protected Button addProductBtn;
     @FXML
@@ -75,5 +76,8 @@ public class Home_AdminController implements Initializable {
 
     public void toHome(ActionEvent event) throws IOException {
         Helper.changeCurrentScreen(event, "login.fxml");
+    }
+    public void toCoupon() throws IOException {
+        Helper.changeScreenAt(contentArea,"product-coupon.fxml");
     }
 }

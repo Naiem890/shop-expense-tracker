@@ -16,31 +16,33 @@
       <VBox prefHeight="472.0" prefWidth="225.0" spacing="4.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
          <Pane prefHeight="62.0" prefWidth="226.0" style="-fx-background-color: #3D3D3D;">
             <children>
-               <HBox alignment="CENTER_LEFT" layoutX="34.0" layoutY="21.0" prefHeight="20.0" prefWidth="158.0" spacing="7.0">
+               <HBox alignment="CENTER" layoutY="21.0" prefHeight="21.0" prefWidth="224.0">
                   <children>
-                     <Label text="Hello," textFill="#ffffff99">
-                        <font>
-                           <Font name="☞Gilroy-Regular" size="18.0" />
-                        </font>
-                     </Label>
-                     <Label fx:id="userName" text="Employee" textFill="WHITE">
-                        <font>
-                           <Font name="☞Gilroy-Bold" size="18.0" />
-                        </font>
-                     </Label>
+                     <HBox alignment="CENTER" prefHeight="20.0" prefWidth="158.0" spacing="7.0">
+                        <children>
+                           <Label text="Hello," textFill="#ffffff99">
+                              <font>
+                                 <Font name="☞Gilroy-Regular" size="18.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="userName" text="Employee" textFill="WHITE">
+                              <font>
+                                 <Font name="☞Gilroy-Bold" size="18.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
                   </children>
                </HBox>
             </children>
          </Pane>
          <Pane prefHeight="28.0" prefWidth="226.0" style="-fx-background-color: #0f0f0f;" />
          <Button fx:id="productListBtn" mnemonicParsing="false" onAction="#toProductList" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Products List" />
-         <Button fx:id="requestProductBtn" mnemonicParsing="false" onAction="#toRequestProduct" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Request Product" />
          <Button fx:id="sellBtn" mnemonicParsing="false" onAction="#toSell" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Sell Product" />
-         <Button fx:id="mySalaryBtn" mnemonicParsing="false" onAction="#toSalary" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="My Salary" />
          <Button fx:id="reportBtn" mnemonicParsing="false" onAction="#toReport" prefHeight="42.0" prefWidth="226.0" styleClass=".button" text="Generate Report" />
          <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#toHome" prefHeight="42.0" prefWidth="226.0" style="-fx-background-color: e00606;" styleClass=".button" text="Logout">
             <VBox.margin>
-               <Insets top="16.0" />
+               <Insets top="52.0" />
             </VBox.margin>
          </Button>
       </VBox>
@@ -57,6 +59,20 @@
                <Font name="☞Gilroy-Bold" size="25.0" />
             </font>
          </Label>
+         <HBox alignment="CENTER" layoutX="676.0" layoutY="12.0" prefHeight="47.0" prefWidth="211.0" spacing="2.0" style="-fx-background-color: #32323280; -fx-background-radius: 100;">
+            <children>
+               <Label prefHeight="35.0" prefWidth="93.0" style="-fx-text-fill: white;" text="\$ Balance: ">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+               <Label fx:id="employeeBalance" style="-fx-text-fill: white;" text="00000">
+                  <font>
+                     <Font size="17.0" />
+                  </font>
+               </Label>
+            </children>
+         </HBox>
       </Pane>
    </top>
 </BorderPane>
