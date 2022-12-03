@@ -3,6 +3,7 @@ package com.example.shopexpensetracker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import org.apache.commons.lang3.math.NumberUtils;
 import java.io.IOException;
 
@@ -45,5 +46,10 @@ public class AddProductController {
         addProductBuyPrice.setText("");
         addProductSellPrice.setText("");
         addProductStock.setText("");
+    }
+
+    public void toProductManage(MouseEvent mouseEvent) throws IOException {
+        Home_AdminController controller = Home_AdminController.getInstance();
+        controller.toProductManage();
     }
 }

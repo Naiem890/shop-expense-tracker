@@ -2,6 +2,7 @@ package com.example.shopexpensetracker;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -146,5 +147,10 @@ public class Product_ManageController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void toAddProduct(ActionEvent actionEvent) throws IOException {
+        Home_AdminController controller = Home_AdminController.getInstance();
+        controller.toAddProduct();
     }
 }
