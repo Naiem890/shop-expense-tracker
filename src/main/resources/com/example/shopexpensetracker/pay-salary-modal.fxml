@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paySalaryModal" prefHeight="366.0" prefWidth="449.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.PaySalaryModalController">
+<AnchorPane fx:id="paySalaryModal" prefHeight="366.0" prefWidth="449.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Controllers.PaySalaryModalController">
    <Label layoutX="29.0" layoutY="21.0" text="Salary Amount">
       <font>
          <Font name="☞Gilroy-Bold" size="24.0" />

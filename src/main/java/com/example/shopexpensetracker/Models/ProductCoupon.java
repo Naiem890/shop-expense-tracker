@@ -1,6 +1,8 @@
-package com.example.shopexpensetracker;
+package com.example.shopexpensetracker.Models;
 
-public class ProductCoupon extends Product{
+import com.example.shopexpensetracker.Models.Product;
+
+public class ProductCoupon extends Product {
     private final String couponCode;
     private final Double discountPercentage;
 

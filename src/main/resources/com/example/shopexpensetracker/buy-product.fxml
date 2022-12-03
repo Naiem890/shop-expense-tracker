@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="472.0" prefWidth="689.6" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.BuyProductController">
+<VBox prefHeight="472.0" prefWidth="689.6" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Controllers.BuyProductController">
    <children>
       <Pane prefHeight="98.0" prefWidth="690.0">
          <children>

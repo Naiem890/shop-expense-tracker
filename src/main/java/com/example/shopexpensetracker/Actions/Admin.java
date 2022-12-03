@@ -1,5 +1,8 @@
-package com.example.shopexpensetracker;
+package com.example.shopexpensetracker.Actions;
 
+import com.example.shopexpensetracker.Models.Bill;
+import com.example.shopexpensetracker.Models.Employee;
+import com.example.shopexpensetracker.Models.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.format.CellDateFormatter;

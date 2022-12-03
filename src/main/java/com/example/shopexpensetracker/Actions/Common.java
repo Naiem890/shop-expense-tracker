@@ -1,5 +1,9 @@
-package com.example.shopexpensetracker;
+package com.example.shopexpensetracker.Actions;
 
+import com.example.shopexpensetracker.Models.Employee;
+import com.example.shopexpensetracker.Models.Product;
+import com.example.shopexpensetracker.Models.ProductCoupon;
+import com.example.shopexpensetracker.Models.Report;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.format.CellDateFormatter;
@@ -16,7 +20,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Common {
-    static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    public static SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
     public static ObservableList<Product> getAllProduct() throws IOException {
         File file = new File("src/main/resources/data/Product.xlsx");

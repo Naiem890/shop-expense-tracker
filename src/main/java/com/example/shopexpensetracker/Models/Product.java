@@ -1,4 +1,4 @@
-package com.example.shopexpensetracker;
+package com.example.shopexpensetracker.Models;
 
 
 

@@ -1,4 +1,6 @@
-package com.example.shopexpensetracker;
+package com.example.shopexpensetracker.Models;
+
+import com.example.shopexpensetracker.Actions.Common;
 
 import java.text.ParseException;
 import java.time.LocalDate;

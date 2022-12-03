@@ -1,5 +1,9 @@
-package com.example.shopexpensetracker;
+package com.example.shopexpensetracker.Controllers;
 
+import com.example.shopexpensetracker.Actions.Admin;
+import com.example.shopexpensetracker.Actions.Common;
+import com.example.shopexpensetracker.Actions.Helper;
+import com.example.shopexpensetracker.Models.Product;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
