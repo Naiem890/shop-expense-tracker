@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Controllers.Home_AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="915.0" stylesheets="@../../../StyleSheet/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopexpensetracker.Home_AdminController">
    <left>
       <VBox prefHeight="472.0" prefWidth="225.0" spacing="4.0" style="-fx-background-color: #0f0f0f;" BorderPane.alignment="CENTER">
          <Pane prefHeight="62.0" prefWidth="226.0" style="-fx-background-color: #3D3D3D;">

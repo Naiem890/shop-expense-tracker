@@ -12,8 +12,4 @@ module com.example.shopexpensetracker {
     exports com.example.shopexpensetracker;
     exports com.example.shopexpensetracker.Models;
     opens com.example.shopexpensetracker.Models to javafx.fxml, org.apache.commons.lang3, org.apache.poi.ooxml, org.apache.poi.poi;
-    exports com.example.shopexpensetracker.Controllers;
-    opens com.example.shopexpensetracker.Controllers to javafx.fxml, org.apache.commons.lang3, org.apache.poi.ooxml, org.apache.poi.poi;
-    exports com.example.shopexpensetracker.Actions;
-    opens com.example.shopexpensetracker.Actions to javafx.fxml, org.apache.commons.lang3, org.apache.poi.ooxml, org.apache.poi.poi;
 }

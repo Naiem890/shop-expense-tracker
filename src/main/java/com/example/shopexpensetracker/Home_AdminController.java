@@ -1,6 +1,5 @@
-package com.example.shopexpensetracker.Controllers;
+package com.example.shopexpensetracker;
 
-import com.example.shopexpensetracker.Actions.Helper;
 import com.example.shopexpensetracker.Models.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

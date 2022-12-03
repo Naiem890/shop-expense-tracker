@@ -1,8 +1,8 @@
-package com.example.shopexpensetracker.Controllers;
+package com.example.shopexpensetracker;
 
-import com.example.shopexpensetracker.Actions.Admin;
-import com.example.shopexpensetracker.Actions.Common;
-import com.example.shopexpensetracker.Actions.Helper;
+import com.example.shopexpensetracker.Admin;
+import com.example.shopexpensetracker.Common;
+import com.example.shopexpensetracker.Helper;
 import com.example.shopexpensetracker.Models.Bill;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

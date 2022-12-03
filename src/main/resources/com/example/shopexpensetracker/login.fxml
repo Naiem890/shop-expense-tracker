@@ -14,7 +14,7 @@
 
 
 <AnchorPane prefHeight="448.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@../../../StyleSheet/app.css" fx:controller="com.example.shopexpensetracker.Controllers.LoginController">
+            stylesheets="@../../../StyleSheet/app.css" fx:controller="com.example.shopexpensetracker.LoginController">
    <Pane prefHeight="454.0" prefWidth="678.0" style="-fx-background-color: #0E5C46;">
       <Label layoutX="295.0" layoutY="78.0" prefHeight="17.0" prefWidth="45.0" text="User" textFill="WHITE">
          <font>

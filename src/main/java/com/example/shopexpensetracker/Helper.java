@@ -1,4 +1,4 @@
-package com.example.shopexpensetracker.Actions;
+package com.example.shopexpensetracker;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

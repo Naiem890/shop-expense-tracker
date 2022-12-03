@@ -1,7 +1,7 @@
-package com.example.shopexpensetracker.Controllers;
+package com.example.shopexpensetracker;
 
-import com.example.shopexpensetracker.Actions.Common;
-import com.example.shopexpensetracker.Actions.Helper;
+import com.example.shopexpensetracker.Common;
+import com.example.shopexpensetracker.Helper;
 import com.example.shopexpensetracker.Models.ProductCoupon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;

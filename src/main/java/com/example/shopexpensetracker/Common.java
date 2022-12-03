@@ -1,4 +1,4 @@
-package com.example.shopexpensetracker.Actions;
+package com.example.shopexpensetracker;
 
 import com.example.shopexpensetracker.Models.Employee;
 import com.example.shopexpensetracker.Models.Product;

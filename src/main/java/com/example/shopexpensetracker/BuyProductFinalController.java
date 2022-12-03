@@ -1,8 +1,5 @@
-package com.example.shopexpensetracker.Controllers;
+package com.example.shopexpensetracker;
 
-import com.example.shopexpensetracker.Actions.Admin;
-import com.example.shopexpensetracker.Actions.Common;
-import com.example.shopexpensetracker.Actions.Helper;
 import com.example.shopexpensetracker.Models.Product;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
