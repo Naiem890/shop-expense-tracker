@@ -65,6 +65,8 @@ public class PaySalaryModalController implements Initializable {
             double salaryAmount = Double.parseDouble(slaryAmountField.getText());
             System.out.println("Salary Amount: " + salaryAmount);
             Admin.paySalary(selectedEmployee,salaryAmount);
+            String reportTitle = "Salary Paid to (" + selectedEmployee.getEmployeeName() + ") - " + salaryAmount;
+            Common.addReport(reportTitle,-1*salaryAmount);
         }
         PaySalaryController.getInstance().refreshTable();
         closeModal();

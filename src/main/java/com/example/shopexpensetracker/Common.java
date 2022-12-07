@@ -109,6 +109,7 @@ public class Common {
         return reports;
     }
     public static void addReport( String reportTitle, double reportAmount) throws IOException {
+        reportAmount= Math.round(reportAmount * 10000) / 10000.0;
         Date now = new Date();
         File file = new File("src/main/resources/data/Report.xlsx");
         System.out.println(file.getAbsolutePath());
